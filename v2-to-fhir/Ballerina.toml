@@ -1,0 +1,19 @@
+[package]
+org = "wso2"
+name = "v2_to_fhir"
+version = "0.1.0"
+distribution = "2201.3.1"
+
+[build-options]
+observabilityIncluded = true
+
+[[dependency]]
+org = "wso2healthcare"
+name = "healthcare.hl7"
+version = "0.1.7"
+
+[[dependency]]
+org = "wso2healthcare"
+name = "healthcare.hl7v23"
+version = "0.1.9"
+repository="local"
