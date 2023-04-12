@@ -11,8 +11,17 @@ import wso2healthcare/healthcare.fhir.r4;
 // function HL7V2_CNN_to_FHIR_Practitioner(hl7v23:XCN xcn) returns r4:Practitioner => {};
 // function HL7V2_CQ_to_FHIR_Quantity(hl7v23:XCN xcn) returns r4:Practitioner => {};
 // function HL7V2_CWE_to_FHIR_Annotation(hl7v23:XCN xcn) returns r4:Practitioner => {};
-// function HL7V2_CWE_to_FHIR_CodeableConcept(hl7v23:XCN xcn) returns r4:Practitioner => {};
-// function HL7V2_CWE_to_FHIR_Coding(hl7v23:XCN xcn) returns r4:Practitioner => {};
+
+function HL7V2_CE_to_FHIR_CodeableConcept(hl7v23:CE ce) returns r4:CodeableConcept => {
+    coding: HL7V2_GetCodings(ce)
+};
+
+function HL7V2_CE_to_FHIR_Coding(hl7v23:CE ce) returns r4:Coding => {
+    code: ce.ce1,
+    display: ce.ce2,
+    system: ce.ce3
+};
+
 // function HL7V2_CWE_to_FHIR_Duration(hl7v23:XCN xcn) returns r4:Practitioner => {};
 // function HL7V2_CWE_to_FHIR_Organization(hl7v23:XCN xcn) returns r4:Practitioner => {};
 // function HL7V2_CWE_to_FHIR_Quantity(hl7v23:XCN xcn) returns r4:Practitioner => {};
@@ -70,7 +79,32 @@ function HL7V2_XAD_to_FHIR_Address(hl7v23:XAD xad) returns r4:Address => {
 // function HL7V2_XCN_to_FHIR_PractitionerRole(hl7v23:XCN xcn) returns r4:PractitionerRole => {};
 // function HL7V2_XCN_to_FHIR_RelatedPerson(hl7v23:XCN xcn) returns r4:RelatedPerson => {};
 // function HL7V2_XON_to_FHIR_Location(hl7v23:XON xon) returns r4:Location => {};
-// function HL7V2_XON_to_FHIR_Organization(hl7v23:XON xon) returns r4:Organization => {};
+
+function HL7V2_XON_to_FHIR_Organization(hl7v23:XON xon) returns r4:Organization {
+    r4:Coding coding = {
+        code: xon.xon7,
+        system: xon.xon7
+    };
+
+    r4:CodeableConcept codeableConcept = {
+        coding: [
+            coding
+        ]
+    };
+
+    r4:Identifier identifier = {
+        value: xon.xon3.toString(),
+        'type: codeableConcept
+    };
+
+    r4:Organization organization = {
+        name: xon.xon1,
+        identifier: [identifier]
+    };
+
+    return organization;
+};
+
 // function HL7V2_XON_to_FHIR_string(hl7v23:XON xon) returns string => {};
 
 function HL7V2_XPN_to_FHIR_HumanName(hl7v23:XPN xpn) returns r4:HumanName => {
@@ -92,3 +126,4 @@ function HL7V2_XTN_to_FHIR_ContactPoint(hl7v23:XTN xtn) returns r4:ContactPoint 
     system: V2ToFHIR_GetContactPointSystem(xtn.xtn3),
     extension: V2ToFHIR_GetIntegerExtension([<int>xtn.xtn5, <int>xtn.xtn6, <int>xtn.xtn7, <int>xtn.xtn8])
 };
+

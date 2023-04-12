@@ -15,14 +15,14 @@ This package intercept HL7 v2.3 messages and construct the relevant FHIR r4 reso
 - [ ] CNN - Composite Id Number And Name Simplified to FHIR Practitioner
 - [ ] CQ - Composite Quantity With Units to FHIR Quantity
 - [ ] CWE - Coded With Exceptions to FHIR Annotation
-- [ ] CWE - Coded With Exceptions to FHIR CodeableConcept
-- [ ] CWE - Coded With Exceptions to FHIR Coding
-- [ ] CWE - Coded With Exceptions to FHIR Duration
-- [ ] CWE - Coded With Exceptions to FHIR Organization
-- [ ] CWE - Coded With Exceptions to FHIR Quantity
-- [ ] CWE - Coded With Exceptions to FHIR code
-- [ ] CWE - Coded With Exceptions to FHIR string
-- [ ] CWE - Coded With Exceptions to FHIR uri
+- [x] CE - Coded With Exceptions to FHIR CodeableConcept
+- [x] CE - Coded With Exceptions to FHIR Coding
+- [ ] CE - Coded With Exceptions to FHIR Duration
+- [ ] CE - Coded With Exceptions to FHIR Organization
+- [ ] CE - Coded With Exceptions to FHIR Quantity
+- [ ] CE - Coded With Exceptions to FHIR code
+- [ ] CE - Coded With Exceptions to FHIR string
+- [ ] CE - Coded With Exceptions to FHIR uri
 - [ ] CX - Extended Composite Id With Check Digit to FHIR Identifier
 - [ ] DLN - Driver’s License Number to FHIR Identifier
 - [ ] DR - Date/Time Range to FHIR DateTime
@@ -66,7 +66,7 @@ This package intercept HL7 v2.3 messages and construct the relevant FHIR r4 reso
 - [ ] XCN - Extended Composite Id Number And Name For Persons to FHIR PractitionerRole
 - [ ] XCN - Extended Composite Id Number And Name For Persons to FHIR RelatedPerson
 - [ ] XON - Extended Composite Name And Identification Number For Organizations to FHIR Location
-- [ ] XON - Extended Composite Name And Identification Number For Organizations to FHIR Organization
+- [x] XON - Extended Composite Name And Identification Number For Organizations to FHIR Organization
 - [ ] XON - Extended Composite Name And Identification Number For Organizations to FHIR string
 - [x] XPN - Extended Person Name to FHIR HumanName
 - [x] XTN - Extended Telecommunication Number to FHIR ContactPoint
@@ -84,7 +84,7 @@ This package intercept HL7 v2.3 messages and construct the relevant FHIR r4 reso
 - [ ] AL1 - Patient Allergy Information to FHIR AllergyIntolerance
 - [ ] EVN - Event Type to FHIR Provenance
 - [ ] IAM - Patient Adverse Reaction Information to FHIR AllergyIntolerance
-- [ ] NK1 - Next of Kin / Associated Parties to FHIR Patient
+- [x] NK1 - Next of Kin / Associated Parties to FHIR Patient
 - [ ] NK1 - Next of Kin / Associated Parties to FHIR RelatedPerson
 - [x] PD1 - Patient Additional Demographic to FHIR Patient
 - [ ] PID - Patient Identification to FHIR Account

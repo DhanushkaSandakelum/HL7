@@ -178,7 +178,7 @@ public function GetHL7v23_PD1_Extension(string pd16) returns r4:Extension[] {
     return extension;
 }
 
-public function GetHL7v23_NK1_Contact(hl7v23:XPN[] nk12, hl7v23:XAD[] nk14, hl7v23:XTN[] nk15, hl7v23:XTN[] nk16, hl7v23:CE nk17, hl7v23:DT nk18, hl7v23:DT nk19, hl7v23:XON[] nk113, hl7v23:IS nk115, hl7v23:XPN[] nk130, hl7v23:XTN[] nk131, hl7v23:XAD nk132) returns r4:PatientContact[] {
+public function GetHL7v23_NK1_Contact(hl7v23:XPN[] nk12, hl7v23:XAD[] nk14, hl7v23:XTN[] nk15, hl7v23:XTN[] nk16, hl7v23:CE nk17, hl7v23:DT nk18, hl7v23:DT nk19, hl7v23:XON[] nk113, hl7v23:IS nk115, hl7v23:XPN[] nk130, hl7v23:XTN[] nk131, hl7v23:XAD[] nk132) returns r4:PatientContact[] {
     r4:PatientContact[] patientContact = [];
 
     foreach hl7v23:XPN item in nk12 {
@@ -195,6 +195,72 @@ public function GetHL7v23_NK1_Contact(hl7v23:XPN[] nk12, hl7v23:XAD[] nk14, hl7v
             // relationship:
         });
     }
+
+    foreach hl7v23:XAD item in nk14 {
+        patientContact.push({
+            // extension: 
+            // period:
+            address: HL7V2_XAD_to_FHIR_Address(item)
+            // gender:
+            // modifierExtension:
+            // organization:
+            // name:
+            // telecom:
+            // id:
+            // relationship:
+        });
+    }
+
+    r4:ContactPoint[] telecoms = [];
+    foreach hl7v23:XTN item in nk15 {
+        telecoms.push(HL7V2_XTN_to_FHIR_ContactPoint(item));
+    }
+    foreach hl7v23:XTN item in nk16 {
+        telecoms.push(HL7V2_XTN_to_FHIR_ContactPoint(item));
+    }
+    patientContact.push({
+        // extension: 
+        // period:
+        // address:
+        // gender:
+        // modifierExtension:
+        // organization:
+        // name:
+        telecom: telecoms
+        // id:
+        // relationship:
+    });
+
+    r4:CodeableConcept[] relationship = [];
+    relationship.push(HL7V2_CE_to_FHIR_CodeableConcept(nk17));
+    patientContact.push({
+        // extension: 
+        // period:
+        // address:
+        // gender:
+        // modifierExtension:
+        // organization:
+        // name:
+        // telecom:
+        // id:
+        relationship: relationship
+    });
+
+    r4:Period period = {'start: nk18, end: nk19};
+    patientContact.push({
+        // extension: 
+        period:period
+        // address:
+        // gender:
+        // modifierExtension:
+        // organization:
+        // name:
+        // telecom:
+        // id:
+        // relationship: 
+    });
+
+    // nk115, nk130, nk131, nk132 needs to be considered
 
     return patientContact;
 }

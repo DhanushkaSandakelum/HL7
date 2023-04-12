@@ -20,9 +20,9 @@ import wso2healthcare/healthcare.fhir.r4;
 // function HL7V2_EVN_to_FHIR_Provenance(hl7v23:EVN evn) returns r4:Provenance => {};
 // function HL7V2_IAM_to_FHIR_AllergyIntolerance(hl7v23:PID pid) returns r4:AllergyIntolerance => {};
 
-// function HL7V2_NK1_to_FHIR_Patient(hl7v23:NK1 nk1) returns r4:Patient => {
-//     contact: nk1.nk12 + nk1.nk14 + nk1.nk15 + nk1.nk16 + nk1.nk17 + nk1.nk18 + nk1.nk19 + nk1.nk113 + nk1.nk115 + nk1.nk130 + nk1.nk131 + nk1.nk132
-// };
+function HL7V2_NK1_to_FHIR_Patient(hl7v23:NK1 nk1) returns r4:Patient => {
+    contact: GetHL7v23_NK1_Contact(nk1.nk12, nk1.nk14, nk1.nk15, nk1.nk16, nk1.nk17, nk1.nk18, nk1.nk19, nk1.nk113, nk1.nk115, nk1.nk130, nk1.nk131, nk1.nk132)
+};
 
 // function HL7V2_NK1_to_FHIR_RelatedPerson(hl7v23:NK1 nk1) returns r4:RelatedPerson => {};
 
@@ -93,11 +93,4 @@ function HL7V2_PV1_to_FHIR_Patient(hl7v23:PV1 pv1) returns r4:Patient => {
 // function HL7V2_ROL_to_FHIR_RelatedPerson(hl7v23:ROL rol) returns r4:RelatedPerson => {};
 // function HL7V2_ROL_to_FHIR_Patient(hl7v23:ROL rol) returns r4:Patient => {};
 // function HL7V2_ROL_to_FHIR_Encounter(hl7v23:ROL rol) returns r4:Encounter => {};
-
-
-
-
-
-
-
 
