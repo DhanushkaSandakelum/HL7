@@ -10,13 +10,11 @@ import wso2healthcare/healthcare.fhir.r4;
 // function HL7V2_MSA_to_FHIR_MessageHeader(hl7v23:MSA msa) returns r4:MessageHeader => {};
 // function HL7V2_MSH_to_FHIR_Bundle(hl7v23:MSH msh) returns r4:Bundle => {};
 
-
-
 function HL7V2_MSH_to_FHIR_MessageHeader(hl7v23:MSH msh) returns r4:MessageHeader => {
     'source: HL7V2_HD_to_FHIR_MessageHeader_source(msh.msh3),
     destination: [HL7V2_HD_to_FHIR_MessageHeader_destination(msh.msh5)],
     eventCoding: HL7V2_MSG_to_FHIR_Coding(msh.msh9),
-    meta: <r4:BaseMessageHeaderMeta> HL7V2_PT_to_FHIR_Meta(msh.msh11),
+    meta: <r4:BaseMessageHeaderMeta>HL7V2_PT_to_FHIR_Meta(msh.msh11),
     language: HL7V2_CE_to_FHIR_code(msh.msh19),
     eventUri: ""
 };
@@ -86,7 +84,14 @@ function HL7V2_PV1_to_FHIR_Patient(hl7v23:PV1 pv1) returns r4:Patient => {
 // function HL7V2_RXR_to_FHIR_Patient(hl7v23:PID pid) returns r4:Immunization => {};
 
 // --- Financial Management ---
-// function HL7V2_DG1_to_FHIR_Condition(hl7v23:DG1 dg1) returns r4:Condition => {};
+function HL7V2_DG1_to_FHIR_Condition(hl7v23:DG1 dg1) returns r4:Condition => {
+    code: HL7V2_CE_to_FHIR_CodeableConcept(dg1.dg13),
+    onsetDateTime: dg1.dg15.ts1,
+    recordedDate: dg1.dg119.ts1 ,
+    subject: {}
+    // asserter: dg1.dg116
+};
+
 // function HL7V2_DG1_to_FHIR_Encounter(hl7v23:DG1 dg1) returns r4:Encounter => {};
 // function HL7V2_DG1_to_FHIR_EpisodeOfCare(hl7v23:DG1 dg1) returns r4:EpisodeOfCare => {};
 // function HL7V2_PR1_to_FHIR_Procedure(hl7v23:PR1 pr1) returns r4:Procedure => {};
