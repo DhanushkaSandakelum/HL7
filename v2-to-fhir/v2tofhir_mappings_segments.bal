@@ -9,7 +9,18 @@ import wso2healthcare/healthcare.fhir.r4;
 // --- Control ---
 // function HL7V2_MSA_to_FHIR_MessageHeader(hl7v23:MSA msa) returns r4:MessageHeader => {};
 // function HL7V2_MSH_to_FHIR_Bundle(hl7v23:MSH msh) returns r4:Bundle => {};
-// function HL7V2_MSH_to_FHIR_MessageHeader(hl7v23:MSH msh) returns r4:MessageHeader => {};
+
+
+
+function HL7V2_MSH_to_FHIR_MessageHeader(hl7v23:MSH msh) returns r4:MessageHeader => {
+    'source: HL7V2_HD_to_FHIR_MessageHeader_source(msh.msh3),
+    destination: [HL7V2_HD_to_FHIR_MessageHeader_destination(msh.msh5)],
+    eventCoding: HL7V2_MSG_to_FHIR_Coding(msh.msh9),
+    meta: <r4:BaseMessageHeaderMeta> HL7V2_PT_to_FHIR_Meta(msh.msh11),
+    language: HL7V2_CE_to_FHIR_code(msh.msh19),
+    eventUri: ""
+};
+
 // function HL7V2_MSH_to_FHIR_Provenance(hl7v23:MSH msh) returns r4:Provenance => {};
 // function HL7V2_NTE_to_FHIR_Observation(hl7v23:PID pid) returns r4:Observation => {};
 // function HL7V2_NTE_to_FHIR_ServiceRequest(hl7v23:PID pid) returns r4:ServiceRequest => {};

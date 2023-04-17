@@ -10,7 +10,10 @@ import wso2healthcare/healthcare.fhir.r4;
 // function HL7V2_CNE_to_FHIR_CodeableConcept(hl7v23:XCN xcn) returns r4:Practitioner => {};
 // function HL7V2_CNN_to_FHIR_Practitioner(hl7v23:XCN xcn) returns r4:Practitioner => {};
 // function HL7V2_CQ_to_FHIR_Quantity(hl7v23:XCN xcn) returns r4:Practitioner => {};
-// function HL7V2_CWE_to_FHIR_Annotation(hl7v23:XCN xcn) returns r4:Practitioner => {};
+
+function HL7V2_CE_to_FHIR_Annotation(hl7v23:CE ce) returns r4:Annotation => {
+    text: ce.ce1
+};
 
 function HL7V2_CE_to_FHIR_CodeableConcept(hl7v23:CE ce) returns r4:CodeableConcept => {
     coding: HL7V2_GetCodings(ce)
@@ -22,12 +25,46 @@ function HL7V2_CE_to_FHIR_Coding(hl7v23:CE ce) returns r4:Coding => {
     system: ce.ce3
 };
 
-// function HL7V2_CWE_to_FHIR_Duration(hl7v23:XCN xcn) returns r4:Practitioner => {};
-// function HL7V2_CWE_to_FHIR_Organization(hl7v23:XCN xcn) returns r4:Practitioner => {};
-// function HL7V2_CWE_to_FHIR_Quantity(hl7v23:XCN xcn) returns r4:Practitioner => {};
-// function HL7V2_CWE_to_FHIR_code(hl7v23:XCN xcn) returns r4:Practitioner => {};
-// function HL7V2_CWE_to_FHIR_string(hl7v23:XCN xcn) returns r4:Practitioner => {};
-// function HL7V2_CWE_to_FHIR_uri(hl7v23:XCN xcn) returns r4:Practitioner => {};
+function HL7V2_CWE_to_FHIR_Duration(hl7v23:CE ce) returns r4:Duration => {
+    code: ce.ce1
+};
+
+function HL7V2_CE_to_FHIR_Organization(hl7v23:CE ce) returns r4:Organization {
+    r4:Identifier[] identifier = [
+        {
+            value: ce.ce1,
+            system: ce.ce3
+        }
+    ];
+
+    r4:Organization organization = {
+        name: ce.ce2,
+        identifier: identifier
+    };
+
+    return organization;
+};
+
+function HL7V2_CE_to_FHIR_Quantity(hl7v23:CE ce) returns r4:Quantity => {
+    code: ce.ce1,
+    unit: ce.ce2,
+    system: ce.ce3
+};
+
+function HL7V2_CE_to_FHIR_code(hl7v23:CE ce) returns r4:code {
+    r4:code code = ce.ce1;
+
+    return code;
+};
+
+function HL7V2_CE_to_FHIR_string(hl7v23:CE ce) returns string {
+    return ce.ce1;
+};
+
+function HL7V2_CE_to_FHIR_uri(hl7v23:CE ce) returns r4:uri {
+    return ce.ce1;
+};
+
 // function HL7V2_CX_to_FHIR_Identifier(hl7v23:XCN xcn) returns r4:Practitioner => {};
 // function HL7V2_DLN_to_FHIR_Identifier(hl7v23:XCN xcn) returns r4:Practitioner => {};
 // function HL7V2_DR_to_FHIR_DateTime(hl7v23:XCN xcn) returns r4:Practitioner => {};
@@ -37,21 +74,106 @@ function HL7V2_CE_to_FHIR_Coding(hl7v23:CE ce) returns r4:Coding => {
 // function HL7V2_EI_to_FHIR_Identifier(hl7v23:XCN xcn) returns r4:Practitioner => {};
 // function HL7V2_EI_to_FHIR_Device(hl7v23:XCN xcn) returns r4:Practitioner => {};
 // function HL7V2_FN_to_FHIR_HumanName(hl7v23:XCN xcn) returns r4:Practitioner => {};
-// function HL7V2_HD_to_FHIR_Location(hl7v23:XCN xcn) returns r4:Practitioner => {};
-// function HL7V2_HD_to_FHIR_Organization(hl7v23:XCN xcn) returns r4:Practitioner => {};
-// function HL7V2_HD_to_FHIR_extension(hl7v23:XCN xcn) returns r4:Practitioner => {};
-// function HL7V2_HD_to_FHIR_MessageHeader(hl7v23:XCN xcn) returns r4:Practitioner => {};
-// function HL7V2_HD_to_FHIR_uri(hl7v23:XCN xcn) returns r4:Practitioner => {};
+
+function HL7V2_HD_to_FHIR_Location(hl7v23:HD hd) returns r4:Location {
+    r4:Identifier[] identifier = [
+        {
+            value: hd.hd2
+        }
+    ];
+
+    r4:Coding[] coding = [
+        {
+            code: hd.hd2,
+            system: hd.hd2
+        }
+    ];
+
+    r4:Location location = {
+        name: hd.hd1,
+        identifier: identifier,
+        physicalType: {
+            coding: coding
+        }
+    };
+
+    return location;
+};
+
+function HL7V2_HD_to_FHIR_Organization(hl7v23:HD hd) returns r4:Organization {
+    r4:Element element = {
+        id: hd.hd3
+    };
+
+    r4:Identifier[] identifier = [
+        {
+            value: hd.hd1 + hd.hd2,
+            'type: element,
+            system: hd.hd3
+        }
+    ];
+
+    r4:Organization organization = {
+        identifier: identifier
+    };
+
+    return organization;
+};
+
+// function HL7V2_HD_to_FHIR_extension(hl7v23:HD hd) returns r4:Extension => {};
+
+function HL7V2_HD_to_FHIR_MessageHeader_destination(hl7v23:HD hd) returns r4:MessageHeaderDestination => {
+    name: hd.hd1,
+    endpoint: hd.hd2,
+    extension: V2ToFHIR_GetStringExtension([hd.hd3])
+
+};
+
+function HL7V2_HD_to_FHIR_MessageHeader_source(hl7v23:HD hd) returns r4:MessageHeaderSource => {
+    name: hd.hd1,
+    endpoint: hd.hd2,
+    extension: V2ToFHIR_GetStringExtension([hd.hd3])
+};
+
+// function HL7V2_HD_to_FHIR_url(hl7v23:HD hd) returns r4:url => {};
+
 // function HL7V2_ID_to_FHIR_CodeableConcept(hl7v23:XCN xcn) returns r4:Practitioner => {};
 // function HL7V2_IS_to_FHIR_CodeableConcept(hl7v23:XCN xcn) returns r4:Practitioner => {};
-// function HL7V2_MSG_to_FHIR_Coding(hl7v23:XCN xcn) returns r4:Practitioner => {};
-// function HL7V2_MSG_to_FHIR_MessageHeader(hl7v23:XCN xcn) returns r4:Practitioner => {};
+
+function HL7V2_MSG_to_FHIR_Coding(hl7v23:CM_MSG msg) returns r4:Coding => {
+    code: msg.cm_msg1,
+    system: msg.cm_msg2
+};
+
+function HL7V2_MSG_to_FHIR_MessageHeader(hl7v23:CM_MSG msg) returns r4:MessageHeader => {
+    eventCoding: {
+        system: msg.cm_msg2
+    },
+    eventUri: "",
+    'source: {endpoint: ""}
+};
+
 // function HL7V2_NA_to_FHIR_NumericArray(hl7v23:XCN xcn) returns r4:Practitioner => {};
 // function HL7V2_NDL_to_FHIR_PractitionerRole(hl7v23:XCN xcn) returns r4:Practitioner => {};
 // function HL7V2_NR_to_FHIR_Ranger(hl7v23:XCN xcn) returns r4:Practitioner => {};
 // function HL7V2_PL_to_FHIR_Location(hl7v23:XCN xcn) returns r4:Practitioner => {};
 // function HL7V2_PLN_to_FHIR_Identifier(hl7v23:XCN xcn) returns r4:Practitioner => {};
-// function HL7V2_PT_to_FHIR_Meta(hl7v23:XCN xcn) returns r4:Practitioner => {};
+
+function HL7V2_PT_to_FHIR_Meta(hl7v23:PT pt) returns r4:Meta {
+    r4:Coding[] coding = [
+        {
+            code: pt.pt1,
+            system: pt.pt2
+        }
+    ];
+
+    r4:Meta meta = {
+        tag: coding
+    };
+
+    return meta;
+};
+
 // function HL7V2_RI_to_FHIR_Timing(hl7v23:XCN xcn) returns r4:Practitioner => {};
 // function HL7V2_RP_to_FHIR_Attachment(hl7v23:XCN xcn) returns r4:Practitioner => {};
 // function HL7V2_SAD_to_FHIR_Address(hl7v23:XCN xcn) returns r4:Practitioner => {};

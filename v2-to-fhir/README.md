@@ -14,15 +14,15 @@ This package intercept HL7 v2.3 messages and construct the relevant FHIR r4 reso
 - [ ] CNE - Coded With No Exceptions to FHIR CodeableConcept
 - [ ] CNN - Composite Id Number And Name Simplified to FHIR Practitioner
 - [ ] CQ - Composite Quantity With Units to FHIR Quantity
-- [ ] CWE - Coded With Exceptions to FHIR Annotation
+- [x] CE - Coded With Exceptions to FHIR Annotation
 - [x] CE - Coded With Exceptions to FHIR CodeableConcept
 - [x] CE - Coded With Exceptions to FHIR Coding
-- [ ] CE - Coded With Exceptions to FHIR Duration
-- [ ] CE - Coded With Exceptions to FHIR Organization
-- [ ] CE - Coded With Exceptions to FHIR Quantity
-- [ ] CE - Coded With Exceptions to FHIR code
-- [ ] CE - Coded With Exceptions to FHIR string
-- [ ] CE - Coded With Exceptions to FHIR uri
+- [x] CE - Coded With Exceptions to FHIR Duration
+- [x] CE - Coded With Exceptions to FHIR Organization
+- [x] CE - Coded With Exceptions to FHIR Quantity
+- [x] CE - Coded With Exceptions to FHIR code
+- [x] CE - Coded With Exceptions to FHIR string
+- [x] CE - Coded With Exceptions to FHIR uri
 - [ ] CX - Extended Composite Id With Check Digit to FHIR Identifier
 - [ ] DLN - Driver’s License Number to FHIR Identifier
 - [ ] DR - Date/Time Range to FHIR DateTime
@@ -35,22 +35,22 @@ This package intercept HL7 v2.3 messages and construct the relevant FHIR r4 reso
 - [ ] EI(Extension) - Entity Identifier to FHIR Identifier
 - [ ] EI(UDICarrier) - Entity Identifier to FHIR Device
 - [ ] FN - Family Name to FHIR HumanName
-- [ ] HD - Hierarchic Designator to FHIR Location
-- [ ] HD - Hierarchic Designator to FHIR Organization
+- [x] HD - Hierarchic Designator to FHIR Location
+- [x] HD - Hierarchic Designator to FHIR Organization
 - [ ] HD(AssigningAuthority) - Hierarchic Designator to FHIR extension
-- [ ] HD(endpoint) - Hierarchic Designator to FHIR MessageHeader.destination
-- [ ] HD(endpointwithname) - Hierarchic Designator to FHIR MessageHeader.source
+- [x] HD(endpoint) - Hierarchic Designator to FHIR MessageHeader.destination
+- [x] HD(endpointwithname) - Hierarchic Designator to FHIR MessageHeader.source
 - [ ] HD - Hierarchic Designator to FHIR url
 - [ ] ID - Coded Value For Hl7 Defined Tables to FHIR CodeableConcept
 - [ ] IS - Coded Value For User to FHIR CodeableConcept
-- [ ] MSG - Message Type to FHIR Coding
-- [ ] MSG - Message Type to FHIR MessageHeader
+- [x] MSG - Message Type to FHIR Coding
+- [x] MSG - Message Type to FHIR MessageHeader
 - [ ] ​NA - Numeric Array to FHIR NumericArray
 - [ ] NDL - Name With Date And Location to FHIR PractitionerRole
 - [ ] NR - Numeric Range to FHIR Range
 - [ ] PL - Person Location to FHIR Location
 - [ ] PLN - Practitioner License Or Other Id Number to FHIR Identifier
-- [ ] PT - Processing Type to FHIR Meta
+- [x] PT - Processing Type to FHIR Meta
 - [ ] RI - Repeat Interval to FHIR Timing
 - [ ] RP - Reference Pointer to FHIR Attachment
 - [ ] SAD - Street Address to FHIR Address
@@ -75,7 +75,7 @@ This package intercept HL7 v2.3 messages and construct the relevant FHIR r4 reso
 ### Control
 - [ ] MSA - Message Acknowledgment to FHIR MessageHeader
 - [ ] MSH - Message Header to FHIR Bundle
-- [ ] MSH - Message Header to FHIR MessageHeader
+- [x] MSH - Message Header to FHIR MessageHeader
 - [ ] MSH(Source) - Message Header to FHIR Provenance
 - [ ] NTE - Notes and Comments to FHIR Observation
 - [ ] NTE - Notes and Comments to FHIR ServiceRequest
