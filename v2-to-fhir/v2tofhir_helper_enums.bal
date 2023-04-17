@@ -10,3 +10,7 @@ public function V2ToFHIR_GetAddressUse(hl7v23:ID id) returns r4:AddressUse => id
 public function V2ToFHIR_GetContactPointUse(hl7v23:ID id) returns r4:ContactPointUse => id is r4:ContactPointUse ? id: "home";
 
 public function V2ToFHIR_GetContactPointSystem(hl7v23:ID id) returns r4:ContactPointSystem => id is r4:ContactPointSystem ? id: "phone";
+
+public function V2ToFHIR_GetRepeatCode(hl7v23:IS 'is) returns r4:RepeatCode => 'is is r4:RepeatCode ? 'is: "BID";
+
+public function V2ToFHIR_GetQuantityComparatorCode(hl7v23:ST st) returns r4:QuantityComparatorCode => st is r4:QuantityComparatorCode ? st: "<";

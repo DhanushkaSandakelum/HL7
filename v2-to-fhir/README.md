@@ -11,9 +11,9 @@ This package intercept HL7 v2.3 messages and construct the relevant FHIR r4 reso
 # Current supported mappings in HL7V2 specification
 ## Data Types
 - [ ] CM(Source) - Composite to FHIR Specimen
-- [ ] CNE - Coded With No Exceptions to FHIR CodeableConcept
+- [x] CNE - Coded With No Exceptions to FHIR CodeableConcept
 - [ ] CNN - Composite Id Number And Name Simplified to FHIR Practitioner
-- [ ] CQ - Composite Quantity With Units to FHIR Quantity
+- [x] CQ - Composite Quantity With Units to FHIR Quantity
 - [x] CE - Coded With Exceptions to FHIR Annotation
 - [x] CE - Coded With Exceptions to FHIR CodeableConcept
 - [x] CE - Coded With Exceptions to FHIR Coding
@@ -23,26 +23,26 @@ This package intercept HL7 v2.3 messages and construct the relevant FHIR r4 reso
 - [x] CE - Coded With Exceptions to FHIR code
 - [x] CE - Coded With Exceptions to FHIR string
 - [x] CE - Coded With Exceptions to FHIR uri
-- [ ] CX - Extended Composite Id With Check Digit to FHIR Identifier
-- [ ] DLN - Driver’s License Number to FHIR Identifier
-- [ ] DR - Date/Time Range to FHIR DateTime
-- [ ] DR - Date/Time Range to FHIR Period
-- [ ] ED - Encapsulated Data to FHIR Attachment
-- [ ] EI - Entity Identifier to FHIR Coding
+- [x] CX - Extended Composite Id With Check Digit to FHIR Identifier
+- [x] DLN - Driver’s License Number to FHIR Identifier
+- [x] DR - Date/Time Range to FHIR DateTime
+- [x] DR - Date/Time Range to FHIR Period
+- [x] ED - Encapsulated Data to FHIR Attachment
+- [x] EI - Entity Identifier to FHIR Coding
 - [ ] EIP(FillerAssignedIdentifer) - Entity Identifier Pair to FHIR Identifier
 - [ ] EIP(PlacerAssignedIdentifier) - Entity Identifier Pair to FHIR Identifier
-- [ ] EI - Entity Identifier to FHIR Procedure
-- [ ] EI(Extension) - Entity Identifier to FHIR Identifier
-- [ ] EI(UDICarrier) - Entity Identifier to FHIR Device
-- [ ] FN - Family Name to FHIR HumanName
+- [x] EI - Entity Identifier to FHIR Procedure
+- [x] EI(Extension) - Entity Identifier to FHIR Identifier
+- [x] EI(UDICarrier) - Entity Identifier to FHIR Device
+- [x] FN - Family Name to FHIR HumanName
 - [x] HD - Hierarchic Designator to FHIR Location
 - [x] HD - Hierarchic Designator to FHIR Organization
 - [ ] HD(AssigningAuthority) - Hierarchic Designator to FHIR extension
 - [x] HD(endpoint) - Hierarchic Designator to FHIR MessageHeader.destination
 - [x] HD(endpointwithname) - Hierarchic Designator to FHIR MessageHeader.source
-- [ ] HD - Hierarchic Designator to FHIR url
-- [ ] ID - Coded Value For Hl7 Defined Tables to FHIR CodeableConcept
-- [ ] IS - Coded Value For User to FHIR CodeableConcept
+- [x] HD - Hierarchic Designator to FHIR url
+- [x] ID - Coded Value For Hl7 Defined Tables to FHIR CodeableConcept
+- [x] IS - Coded Value For User to FHIR CodeableConcept
 - [x] MSG - Message Type to FHIR Coding
 - [x] MSG - Message Type to FHIR MessageHeader
 - [ ] ​NA - Numeric Array to FHIR NumericArray
@@ -51,13 +51,13 @@ This package intercept HL7 v2.3 messages and construct the relevant FHIR r4 reso
 - [ ] PL - Person Location to FHIR Location
 - [ ] PLN - Practitioner License Or Other Id Number to FHIR Identifier
 - [x] PT - Processing Type to FHIR Meta
-- [ ] RI - Repeat Interval to FHIR Timing
-- [ ] RP - Reference Pointer to FHIR Attachment
+- [x] RI - Repeat Interval to FHIR Timing
+- [x] RP - Reference Pointer to FHIR Attachment
 - [ ] SAD - Street Address to FHIR Address
-- [ ] N - Structured Numeric to FHIR Quantity
-- [ ] SN - Structured Numeric to FHIR Range
-- [ ] SN - Structured Numeric to FHIR Ratio
-- [ ] ST - String Data to FHIR Identifier
+- [x] SN - Structured Numeric to FHIR Quantity
+- [x] SN - Structured Numeric to FHIR Range
+- [x] SN - Structured Numeric to FHIR Ratio
+- [x] ST - String Data to FHIR Identifier
 - [ ] TQ - Timing/Quantity to FHIR MedicationRequest
 - [ ] TQ - Timing/Quantity to FHIR ServiceRequest
 - [ ] TQ(executionPeriod) - Timing/Quantity to FHIR Task
