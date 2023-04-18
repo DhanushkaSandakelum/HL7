@@ -39,5 +39,6 @@
 ## Segments
 - MSH - Message Header to FHIR MessageHeader
 - EVN - Event Type to FHIR Provenance
+- AL1 - Patient Allergy Information to FHIR AllergyIntolerance
 
 ## Messages
