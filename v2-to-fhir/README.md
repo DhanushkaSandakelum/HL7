@@ -82,7 +82,7 @@ This package intercept HL7 v2.3 messages and construct the relevant FHIR r4 reso
 - [ ] SFT - Software Segment to FHIR MessageHeader
 ### Patient Administration
 - [ ] AL1 - Patient Allergy Information to FHIR AllergyIntolerance
-- [ ] EVN - Event Type to FHIR Provenance
+- [x] EVN - Event Type to FHIR Provenance
 - [ ] IAM - Patient Adverse Reaction Information to FHIR AllergyIntolerance
 - [x] NK1 - Next of Kin / Associated Parties to FHIR Patient
 - [ ] NK1 - Next of Kin / Associated Parties to FHIR RelatedPerson

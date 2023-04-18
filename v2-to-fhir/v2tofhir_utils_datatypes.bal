@@ -8,3 +8,11 @@ function HL7V2_GetCodings(hl7v23:CE ce) returns r4:Coding[] {
 
     return coding;
 }
+
+function HL7V2_GetCodeableConcepts(hl7v23:CE ce) returns r4:CodeableConcept[] {
+    r4:CodeableConcept[] codeableConcept = [];
+
+    codeableConcept.push(HL7V2_CE_to_FHIR_CodeableConcept(ce));
+
+    return codeableConcept;
+}

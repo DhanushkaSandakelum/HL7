@@ -38,5 +38,6 @@
 
 ## Segments
 - MSH - Message Header to FHIR MessageHeader
+- EVN - Event Type to FHIR Provenance
 
 ## Messages

@@ -14,3 +14,9 @@ public function V2ToFHIR_GetContactPointSystem(hl7v23:ID id) returns r4:ContactP
 public function V2ToFHIR_GetRepeatCode(hl7v23:IS 'is) returns r4:RepeatCode => 'is is r4:RepeatCode ? 'is: "BID";
 
 public function V2ToFHIR_GetQuantityComparatorCode(hl7v23:ST st) returns r4:QuantityComparatorCode => st is r4:QuantityComparatorCode ? st: "<";
+
+public function V2ToFHIR_GetAllergyIntoleranceCategory(hl7v23:IS 'is) returns r4:AllergyIntoleranceCategory => 'is is r4:AllergyIntoleranceCategory ? 'is: "environment";
+
+public function V2ToFHIR_GetAllergyIntoleranceType(hl7v23:IS 'is) returns r4:AllergyIntoleranceType => 'is is r4:AllergyIntoleranceType ? 'is: "intolerance";
+
+public function V2ToFHIR_GetAllergyIntoleranceCriticality(hl7v23:IS 'is) returns r4:AllergyIntoleranceCriticality => 'is is r4:AllergyIntoleranceCriticality ? 'is: "high";
