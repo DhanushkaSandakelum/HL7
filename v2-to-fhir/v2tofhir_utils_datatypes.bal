@@ -16,3 +16,11 @@ function HL7V2_GetCodeableConcepts(hl7v23:CE ce) returns r4:CodeableConcept[] {
 
     return codeableConcept;
 }
+
+function HL7V2_GetCodeableConceptsGivenID(hl7v23:ID id) returns r4:CodeableConcept[] {
+    r4:CodeableConcept[] codeableConcept = [];
+
+    codeableConcept.push(HL7V2_ID_to_FHIR_CodeableConcept(id));
+
+    return codeableConcept;
+}

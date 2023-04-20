@@ -46,7 +46,7 @@ This package intercept HL7 v2.3 messages and construct the relevant FHIR r4 reso
 - [x] MSG - Message Type to FHIR Coding
 - [x] MSG - Message Type to FHIR MessageHeader
 - [ ] ​NA - Numeric Array to FHIR NumericArray
-- [ ] NDL - Name With Date And Location to FHIR PractitionerRole
+- [x] NDL - Name With Date And Location to FHIR PractitionerRole
 - [ ] NR - Numeric Range to FHIR Range
 - [ ] PL - Person Location to FHIR Location
 - [ ] PLN - Practitioner License Or Other Id Number to FHIR Identifier
@@ -96,10 +96,10 @@ This package intercept HL7 v2.3 messages and construct the relevant FHIR r4 reso
 - [x] PV1 - Patient Visit to FHIR Patient
 - [ ] PV2 - Patient Visit - Additional Information to FHIR Encounter
 ### Order Entry
-- [ ] OBR - Observation Request to FHIR DiagnosticReport
-- [ ] OBR - Observation Request to FHIR ServiceRequest
-- [ ] ORC - Common Order to FHIR DiagnosticReport
-- [ ] ORC - Common Order to FHIR Immunization
+- [x] OBR - Observation Request to FHIR DiagnosticReport
+- [x] OBR - Observation Request to FHIR ServiceRequest
+- [x] ORC - Common Order to FHIR DiagnosticReport
+- [x] ORC - Common Order to FHIR Immunization
 - [ ] ORC - Common Order to FHIR Provenance
 - [ ] ORC - Common Order to FHIR ServiceRequest
 ### Order Entry: Pharmacy/Treatment, Vaccination

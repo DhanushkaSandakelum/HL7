@@ -289,7 +289,16 @@ function HL7V2_MSG_to_FHIR_MessageHeader(hl7v23:CM_MSG msg) returns r4:MessageHe
 };
 
 // function HL7V2_NA_to_FHIR_NumericArray(hl7v23:XCN xcn) returns r4:Practitioner => {};
-// function HL7V2_NDL_to_FHIR_PractitionerRole(hl7v23:XCN xcn) returns r4:Practitioner => {};
+
+function HL7V2_NDL_to_FHIR_PractitionerRole(hl7v23:CM_NDL ndl) returns r4:PractitionerRole => {
+    practitioner: HL7V2_CN_to_FHIR_Reference(ndl.cm_ndl1),
+    period: {
+        'start: HL7V2_TS_to_FHIR_dateTime(ndl.cm_ndl2),
+        end: HL7V2_TS_to_FHIR_dateTime(ndl.cm_ndl3)
+    },
+    identifier: [HL7V2_IS_to_FHIR_Identifier(ndl.cm_ndl4)]
+};
+
 // function HL7V2_NR_to_FHIR_Ranger(hl7v23:XCN xcn) returns r4:Practitioner => {};
 
 // TODO: Complex mapping

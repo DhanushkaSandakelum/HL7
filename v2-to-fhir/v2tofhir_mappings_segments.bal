@@ -30,17 +30,23 @@ function HL7V2_MSH_to_FHIR_MessageHeader(hl7v23:MSH msh) returns r4:MessageHeade
 
 // --- Patient Administation
 function HL7V2_AL1_to_FHIR_AllerygyIntolerance(hl7v23:AL1 al1) returns r4:AllergyIntolerance {
-    r4:Coding[] coding = [{
-        code: al1.al11.toString(),
-        system: al1.al11.toString()
-    }];
+    r4:Coding[] coding = [
+        {
+            code: al1.al11.toString(),
+            system: al1.al11.toString()
+        }
+    ];
 
-    r4:AllergyIntoleranceReaction[] allergyIntoleranceReaction = [{
-        manifestation: [{
-            text: al1.al15
-        }],
-        onset: al1.al16
-    }];
+    r4:AllergyIntoleranceReaction[] allergyIntoleranceReaction = [
+        {
+            manifestation: [
+                {
+                    text: al1.al15
+                }
+            ],
+            onset: al1.al16
+        }
+    ];
 
     r4:AllergyIntolerance allergyIntolerance = {
         clinicalStatus: {
@@ -182,10 +188,132 @@ function HL7V2_PV2_to_FHIR_Encounter(hl7v23:PV2 pv2) returns r4:Encounter {
 };
 
 // --- Order Entry ---
-// function HL7V2_OBR_to_FHIR_DiagnosticReport(hl7v23:PID pid) returns r4:DiagnosticReport => {};
-// function HL7V2_OBR_to_FHIR_ServiceRequest(hl7v23:PID pid) returns r4:ServiceRequest => {};
-// function HL7V2_ORC_to_FHIR_DiagnosticReport(hl7v23:PID pid) returns r4:DiagnosticReport => {};
-// function HL7V2_ORC_to_FHIR_Immunization(hl7v23:PID pid) returns r4:Immunization => {};
+function HL7V2_OBR_to_FHIR_DiagnosticReport(hl7v23:OBR obr) returns r4:DiagnosticReport {
+    r4:DiagnosticReport diagnosticReport = {
+        subject: {
+            identifier: HL7V2_EI_to_FHIR_Identifier(obr.obr2[0])
+        },
+        code: HL7V2_CE_to_FHIR_CodeableConcept(obr.obr4),
+        effectiveDateTime: HL7V2_TS_to_FHIR_dateTime(obr.obr7),
+        effectivePeriod: {
+            'start: HL7V2_TS_to_FHIR_dateTime(obr.obr7),
+            end: HL7V2_TS_to_FHIR_dateTime(obr.obr8)
+        },
+        issued: HL7V2_TS_to_FHIR_instant(obr.obr22),
+        category: HL7V2_GetCodeableConceptsGivenID(obr.obr24),
+        status: V2ToFHIR_GetDiagnosticReportStatus(obr.obr25)
+        // resultsInterpreter: HL7V2_NDL_to_FHIR_PractitionerRole(obr.obr32),
+        // performer: obr.obr34 + obr.obr35
+    };
+
+    return diagnosticReport;
+};
+
+function HL7V2_OBR_to_FHIR_ServiceRequest(hl7v23:OBR obr) returns r4:ServiceRequest => {
+    intent: V2ToFHIR_GetServiceRequestIntent(obr.name),
+    identifier: [HL7V2_EI_to_FHIR_Identifier(obr.obr3), HL7V2_EI_to_FHIR_Identifier(obr.obr2[0])],
+    code: HL7V2_CE_to_FHIR_CodeableConcept(obr.obr4),
+    priority: V2ToFHIR_GetServiceRequestPriority(obr.obr5),
+    occurrenceDateTime: HL7V2_TS_to_FHIR_dateTime(obr.obr6),
+    requester: HL7V2_XCN_to_FHIR_Reference(obr.obr16[0]),
+    // basedOn: obr.obr29,
+    reasonCode: [HL7V2_CE_to_FHIR_CodeableConcept(obr.obr31[0])],
+    status: "unknown",
+    subject: {}
+};
+
+function HL7V2_ORC_to_FHIR_DiagnosticReport(hl7v23:ORC orc) returns r4:DiagnosticReport {
+    // Identifier
+    r4:Identifier[] identifierList = [];
+
+    foreach var item in orc.orc2 {
+        r4:CodeableConcept tempCC = {coding: [HL7V2_EI_to_FHIR_Coding(item)]};
+
+        identifierList.push({
+            'type: tempCC
+        });
+    }
+
+    r4:CodeableConcept cc1 = {coding: [HL7V2_EI_to_FHIR_Coding(orc.orc2[0])]};
+
+    r4:Identifier id1 = {
+        'type: cc1
+    };
+
+    r4:CodeableConcept cc2 = {coding: [HL7V2_EI_to_FHIR_Coding(orc.orc3)]};
+
+    r4:Identifier id2 = {
+        'type: cc2
+    };
+
+    r4:CodeableConcept cc3 = {coding: [HL7V2_EI_to_FHIR_Coding(orc.orc4)]};
+
+    r4:Identifier id3 = {
+        'type: cc3
+    };
+
+    // Extensions
+    r4:Extension[] ext = [
+        {
+            url: HL7V2_CE_to_FHIR_uri(orc.orc16),
+            valueCodeableConcept: HL7V2_CE_to_FHIR_CodeableConcept(orc.orc16)
+        }
+    ];
+
+    r4:DiagnosticReport diagnosticReport = {
+        identifier: [...identifierList, id1, HL7V2_EI_to_FHIR_Identifier(orc.orc3), id2, HL7V2_EI_to_FHIR_Identifier(orc.orc3), id3],
+        extension: ext,
+        code: {},
+        status: "partial"
+    };
+
+    return diagnosticReport;
+};
+
+function HL7V2_ORC_to_FHIR_Immunization(hl7v23:ORC orc) returns r4:Immunization {
+    // Identifier
+    r4:Identifier[] identifierList = [];
+
+    foreach var item in orc.orc2 {
+        r4:CodeableConcept tempCC = {coding: [HL7V2_EI_to_FHIR_Coding(item)]};
+
+        identifierList.push({
+            'type: tempCC
+        });
+    }
+
+    r4:CodeableConcept cc1 = {coding: [HL7V2_EI_to_FHIR_Coding(orc.orc2[0])]};
+
+    r4:Identifier id1 = {
+        'type: cc1
+    };
+
+    r4:CodeableConcept cc2 = {coding: [HL7V2_EI_to_FHIR_Coding(orc.orc3)]};
+
+    r4:Identifier id2 = {
+        'type: cc2
+    };
+
+    // performer
+    r4:ImmunizationPerformer[] immunizationPerformer = [{
+        actor: HL7V2_XCN_to_FHIR_Reference(orc.orc12[0]),
+        'function: HL7V2_XCN_to_FHIR_CodeableConcept(orc.orc12[0])
+    }];
+
+    r4:Immunization immunization = {
+        identifier: [...identifierList, id1, HL7V2_EI_to_FHIR_Identifier(orc.orc3), id2],
+        recorded: HL7V2_TS_to_FHIR_dateTime(orc.orc9),
+        performer: immunizationPerformer,
+        occurrenceDateTime: "",
+        occurrenceString: "",
+        patient: {},
+        status: "not-done",
+        vaccineCode: {}
+    };
+
+    return immunization;
+};
+
 // function HL7V2_ORC_to_FHIR_Provenance(hl7v23:PID pid) returns r4:Provenance => {};
 // function HL7V2_ORC_to_FHIR_ServiceRequest(hl7v23:PID pid) returns r4:ServiceRequest => {};
 

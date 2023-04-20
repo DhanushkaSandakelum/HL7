@@ -13,3 +13,6 @@
 - ORC is not in the hl7v23 library
 - PL to EncounterLocation not in IG - temporary used pv2.pv21.p1 as location at HL7V2_PV2_to_FHIR_Encounter()
 - XCN to EncounterParticipant not in IG - temporary used pv2.pv213.xcn1 as participant at HL7V2_PV2_to_FHIR_Encounter()
+- CN to Reference custom mapping added since its not in the IG
+- IS to Identifier custom mapping added since its not in the IG
+- XCN to CodeableConcept custom mapping added since its not in the IG
