@@ -100,8 +100,8 @@ This package intercept HL7 v2.3 messages and construct the relevant FHIR r4 reso
 - [x] OBR - Observation Request to FHIR ServiceRequest
 - [x] ORC - Common Order to FHIR DiagnosticReport
 - [x] ORC - Common Order to FHIR Immunization
-- [ ] ORC - Common Order to FHIR Provenance
-- [ ] ORC - Common Order to FHIR ServiceRequest
+- [x] ORC - Common Order to FHIR Provenance
+- [x] ORC - Common Order to FHIR ServiceRequest
 ### Order Entry: Pharmacy/Treatment, Vaccination
 - [ ] RXA - Pharmacy/Treatment Administration to FHIR Immunization
 - [ ] RXR - Pharmacy/Treatment Route to FHIR Immunization

@@ -26,3 +26,5 @@ public function V2ToFHIR_GetDiagnosticReportStatus(hl7v23:ID id) returns r4:Diag
 public function V2ToFHIR_GetServiceRequestIntent(string name) returns r4:ServiceRequestIntent => name is r4:ServiceRequestIntent ? name: "proposal";
 
 public function V2ToFHIR_GetServiceRequestPriority(hl7v23:ID id) returns r4:ServiceRequestPriority => id is r4:ServiceRequestPriority ? id: "stat";
+
+public function V2ToFHIR_GetServiceRequestStatus(hl7v23:ID id) returns r4:ServiceRequestStatus => id is r4:ServiceRequestStatus ? id: "draft";

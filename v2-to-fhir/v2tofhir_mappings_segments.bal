@@ -314,8 +314,67 @@ function HL7V2_ORC_to_FHIR_Immunization(hl7v23:ORC orc) returns r4:Immunization 
     return immunization;
 };
 
-// function HL7V2_ORC_to_FHIR_Provenance(hl7v23:PID pid) returns r4:Provenance => {};
-// function HL7V2_ORC_to_FHIR_ServiceRequest(hl7v23:PID pid) returns r4:ServiceRequest => {};
+function HL7V2_ORC_to_FHIR_Provenance(hl7v23:ORC orc) returns r4:Provenance {
+    r4:Coding coding = {
+        code: orc.orc1,
+        system: orc.orc1
+    };
+
+    r4:CodeableConcept activity = {
+        coding: [coding]
+    };
+
+    r4:ProvenanceAgent agent1 = {
+        who: HL7V2_XCN_to_FHIR_Reference(orc.orc10)
+        // 'type: {coding: } //TODO: Mapping not defined in the spec
+    };
+
+    r4:ProvenanceAgent agent2 = {
+        who: HL7V2_XCN_to_FHIR_Reference(orc.orc11)
+        // 'type: {coding: } //TODO: Mapping not defined in the spec
+    };
+
+    r4:ProvenanceAgent agent3 = {
+        who: HL7V2_XCN_to_FHIR_Reference(orc.orc12[0])
+        // 'type: {coding: } //TODO: Mapping not defined in the spec
+    };
+
+    r4:ProvenanceAgent agent4 = {
+        who: {}
+        // onBehalfOf: orc.orc17 //TODO: CE to REF mapping in not defined in the IG
+        // 'type: {coding: } //TODO: Mapping not defined in the spec
+    };
+
+     r4:ProvenanceAgent agent5 = {
+        who: HL7V2_XCN_to_FHIR_Reference(orc.orc19)
+        // onBehalfOf: orc.orc17 //TODO: CE to REF mapping in not defined in the IG
+        // 'type: {coding: } //TODO: Mapping not defined in the spec
+    };
+
+    r4:Provenance provenance = {
+        activity: activity,
+        agent: [agent1, agent2, agent3, agent4, agent5],
+        recorded: HL7V2_TS_to_FHIR_instant(orc.orc9),
+        occurredDateTime: HL7V2_TS_to_FHIR_dateTime(orc.orc9),
+        target: []
+    };
+
+    return provenance;
+};
+
+function HL7V2_ORC_to_FHIR_ServiceRequest(hl7v23:ORC orc) returns r4:ServiceRequest {
+    r4:ServiceRequest serviceRequest ={
+        status: V2ToFHIR_GetServiceRequestStatus(orc.orc1),
+        intent: V2ToFHIR_GetServiceRequestIntent(orc.orc2[0].ei1),
+        identifier: [HL7V2_EI_to_FHIR_Identifier(orc.orc2[0]), HL7V2_EI_to_FHIR_Identifier(orc.orc3), HL7V2_EI_to_FHIR_Identifier(orc.orc4)],
+        authoredOn: HL7V2_TS_to_FHIR_dateTime(orc.orc9),
+        requester: HL7V2_XCN_to_FHIR_Reference(orc.orc12[0]),
+        extension: [{url: HL7V2_CE_to_FHIR_uri(orc.orc16), valueCodeableConcept: HL7V2_CE_to_FHIR_CodeableConcept(orc.orc16)}],
+        subject: {}
+    };
+
+    return serviceRequest;
+};
 
 // --- Order Entry: Pharmacy/Treatment, Vaccincation ---
 // function HL7V2_RXA_to_FHIR_Patient(hl7v23:PID pid) returns r4:Immunization => {};
